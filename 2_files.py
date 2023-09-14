@@ -24,6 +24,11 @@ def main():
 
     try:
         response = requests.get(url, allow_redirects=True)
+
+    except (requests.HTTPError, requests.ConnectionError) as error:
+        print(error)
+
+    else:
         with open('referat.txt', 'wb') as file:
             file.write(response.content)
 
@@ -37,9 +42,6 @@ def main():
 
         with open('referat2.txt', 'w') as file:
             file.write(text)
-
-    except requests.HTTPError as error:
-        print(error)
 
 
 if __name__ == "__main__":
